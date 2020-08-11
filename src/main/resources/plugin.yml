@@ -1,0 +1,59 @@
+name: BannerABC
+description: Dieses Plugin fügt ein BannerABC hinzu.
+main: de.aerulion.bannerabc.Main
+version: 1.3
+api-version: 1.16
+author: aerulion
+commands:
+  bannerabc:
+    description: BannerABC öffnen.
+    aliases: [babc, abc]
+  bannerdatabase:
+    description: BannerDatabase öffnen.
+    aliases: [bdatabase, bd]
+  bannerdatabasecategory:
+    description: BannerDatabase öffnen.
+    aliases: [bdatabasecategory, bdc]
+  bdreload:
+    description: BannerDatabase reloaden.
+  bdhelp:
+    description: Hilfefenster anzeigen.
+  bdmigrate:
+    description: Datenbank migrieren.
+permissions:
+  bannerabc.use:
+    description: Erlaubt dem Spieler das BannerABC zu nutzen.
+    default: op
+  bannerabc.database:
+    description: Erlaubt dem Spieler die BannerDatabase zu nutzen.
+    default: op
+  bannerabc.addbanner:
+    description: Erlaubt dem Spieler Banner zur BannerDatabase hinzuzufügen.
+    default: op
+  bannerabc.removebanner:
+    description: Erlaubt dem Spieler Banner von der BannerDatabase zu entfernen.
+    default: op
+  bannerabc.addcategory:
+    description: Erlaubt dem Spieler Kategorien zur BannerDatabase hinzuzufügen.
+    default: op
+  bannerabc.removecategory:
+    description: Erlaubt dem Spieler Kategorien von der BannerDatabase zu entfernen.
+    default: op
+  bannerabc.setcategoryitem:
+    description: Erlaubt dem Spieler das Kategorie-Item zu ändern.
+    default: op
+  bannerabc.changebannercategory:
+    description: Erlaubt dem Spieler die Kategorie eines Banners zu ändern.
+    default: op
+  bannerabc.renamecategory:
+    description: Erlaubt dem Spieler eine Kategorie umzubenennen.
+    default: op
+  bannerabc.reload:
+    description: Erlaubt dem Spieler das Plugin zu reloaden.
+    default: op
+  bannerabc.help:
+    description: Erlaubt dem Spieler das Hilfefenster zu sehen.
+    default: op
+  bannerabc.migrate:
+    description: Erlaubt dem Spieler die Datenbank zu migrieren.
+    default: op
