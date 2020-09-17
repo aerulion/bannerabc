@@ -1,19 +1,19 @@
 name: BannerABC
 description: Dieses Plugin fügt ein BannerABC hinzu.
 main: net.aerulion.bannerabc.Main
-version: 1.3
-api-version: 1.16
+version: '1.4'
+api-version: '1.16'
 author: aerulion
 commands:
   bannerabc:
     description: BannerABC öffnen.
-    aliases: [babc, abc]
+    aliases: [ babc, abc ]
   bannerdatabase:
     description: BannerDatabase öffnen.
-    aliases: [bdatabase, bd]
+    aliases: [ bdatabase, bd ]
   bannerdatabasecategory:
     description: BannerDatabase öffnen.
-    aliases: [bdatabasecategory, bdc]
+    aliases: [ bdatabasecategory, bdc ]
   bdreload:
     description: BannerDatabase reloaden.
   bdhelp:
