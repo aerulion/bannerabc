@@ -2,7 +2,7 @@ name: BannerABC
 description: Dieses Plugin fügt ein BannerABC hinzu.
 main: net.aerulion.bannerabc.Main
 version: '1.4'
-api-version: '1.16'
+api-version: '1.17'
 author: aerulion
 commands:
   bannerabc:
