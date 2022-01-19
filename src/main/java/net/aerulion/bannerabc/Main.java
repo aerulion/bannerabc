@@ -1,13 +1,13 @@
 package net.aerulion.bannerabc;
 
-import net.aerulion.bannerabc.CMDs.CMD_BANNERABC;
-import net.aerulion.bannerabc.CMDs.CMD_BANNERDATABASE;
-import net.aerulion.bannerabc.CMDs.CMD_BANNERDATABASECATEGORY;
-import net.aerulion.bannerabc.CMDs.CMD_BDHELP;
-import net.aerulion.bannerabc.CMDs.CMD_BDMIGRATE;
-import net.aerulion.bannerabc.CMDs.CMD_BDRELOAD;
-import net.aerulion.bannerabc.Utils.FileManager;
-import net.aerulion.bannerabc.Utils.MenuManager;
+import net.aerulion.bannerabc.cmd.AbcCommand;
+import net.aerulion.bannerabc.cmd.DatabaseCommand;
+import net.aerulion.bannerabc.cmd.DatabaseCategoryCommand;
+import net.aerulion.bannerabc.cmd.HelpCommand;
+import net.aerulion.bannerabc.cmd.MigrateCommand;
+import net.aerulion.bannerabc.cmd.ReloadCommand;
+import net.aerulion.bannerabc.utils.FileManager;
+import net.aerulion.bannerabc.utils.MenuManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -21,23 +21,23 @@ public class Main extends JavaPlugin {
     FileManager.loadCategories();
     FileManager.loadBanners();
 
-    getCommand("bannerabc").setExecutor(new CMD_BANNERABC());
-    getCommand("bannerabc").setTabCompleter(new CMD_BANNERABC());
+    getCommand("bannerabc").setExecutor(new AbcCommand());
+    getCommand("bannerabc").setTabCompleter(new AbcCommand());
 
-    getCommand("bannerdatabase").setExecutor(new CMD_BANNERDATABASE());
-    getCommand("bannerdatabase").setTabCompleter(new CMD_BANNERDATABASE());
+    getCommand("bannerdatabase").setExecutor(new DatabaseCommand());
+    getCommand("bannerdatabase").setTabCompleter(new DatabaseCommand());
 
-    getCommand("bannerdatabasecategory").setExecutor(new CMD_BANNERDATABASECATEGORY());
-    getCommand("bannerdatabasecategory").setTabCompleter(new CMD_BANNERDATABASECATEGORY());
+    getCommand("bannerdatabasecategory").setExecutor(new DatabaseCategoryCommand());
+    getCommand("bannerdatabasecategory").setTabCompleter(new DatabaseCategoryCommand());
 
-    getCommand("bdreload").setExecutor(new CMD_BDRELOAD());
-    getCommand("bdreload").setTabCompleter(new CMD_BDRELOAD());
+    getCommand("bdreload").setExecutor(new ReloadCommand());
+    getCommand("bdreload").setTabCompleter(new ReloadCommand());
 
-    getCommand("bdhelp").setExecutor(new CMD_BDHELP());
-    getCommand("bdhelp").setTabCompleter(new CMD_BDHELP());
+    getCommand("bdhelp").setExecutor(new HelpCommand());
+    getCommand("bdhelp").setTabCompleter(new HelpCommand());
 
-    getCommand("bdmigrate").setExecutor(new CMD_BDMIGRATE());
-    getCommand("bdmigrate").setTabCompleter(new CMD_BDMIGRATE());
+    getCommand("bdmigrate").setExecutor(new MigrateCommand());
+    getCommand("bdmigrate").setTabCompleter(new MigrateCommand());
 
     getServer().getPluginManager().registerEvents(new MenuManager(), this);
   }

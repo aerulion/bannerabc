@@ -1,19 +1,20 @@
-package net.aerulion.bannerabc.CMDs;
+package net.aerulion.bannerabc.cmd;
 
 import java.util.Collections;
 import java.util.List;
 import net.aerulion.bannerabc.Main;
-import net.aerulion.bannerabc.Utils.FileManager;
+import net.aerulion.bannerabc.utils.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.jetbrains.annotations.NotNull;
 
-public class CMD_BDMIGRATE implements CommandExecutor, TabCompleter {
+public class MigrateCommand implements CommandExecutor, TabCompleter {
 
   @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+  public boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final String[] args) {
 
     if (!(sender.hasPermission("bannerabc.migrate"))) {
       sender.sendMessage(
@@ -29,8 +30,8 @@ public class CMD_BDMIGRATE implements CommandExecutor, TabCompleter {
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command cmd, String label,
-      String[] args) {
+  public List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String alias,
+      final String[] args) {
     return Collections.emptyList();
   }
 }

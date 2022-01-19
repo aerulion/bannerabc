@@ -1,11 +1,11 @@
-package net.aerulion.bannerabc.CMDs;
+package net.aerulion.bannerabc.cmd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import net.aerulion.bannerabc.Utils.FileManager;
-import net.aerulion.bannerabc.Utils.Utils;
+import net.aerulion.bannerabc.utils.FileManager;
+import net.aerulion.bannerabc.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,19 +13,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter {
+public class DatabaseCategoryCommand implements CommandExecutor, TabCompleter {
 
   @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+  public boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final String @NotNull [] args) {
 
-    if (!(sender instanceof Player)) {
+    if (!(sender instanceof final @NotNull Player p)) {
       sender.sendMessage(
           "§8[§a§l§oBannerABC§8] §cDieses Command kann nur von Spieler ausgeführt werden!");
       return true;
     }
-
-    Player p = (Player) sender;
 
     try {
 
@@ -36,23 +35,23 @@ public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter
                 "§8[§a§l§oBannerABC§8] §cFehler: Du hast nicht die erforderlichen Rechte!");
             return true;
           }
-          if (Utils.categories.size() >= 54) {
+          if (Utils.CATEGORIES.size() >= 54) {
             sender.sendMessage(
                 "§8[§a§l§oBannerABC§8] §cFehler: Du hast die maximale Anzahl an Kategorien erstellt!");
             return true;
           }
-          if (p.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
+          if (p.getInventory().getItemInMainHand().getType() == Material.AIR) {
             sender.sendMessage(
                 "§8[§a§l§oBannerABC§8] §cFehler: Du musst ein Item in der Hand halten!");
             return true;
           }
-          if (FileManager.CategoryExists(args[1].replaceAll("#", " "), false)) {
+          if (FileManager.categoryExists(args[1].replaceAll("#", " "), false)) {
             sender.sendMessage(
                 "§8[§a§l§oBannerABC§8] §cFehler: Es existiert bereits eine Kategorie mit diesem Namen!");
             return true;
           }
-          ItemStack DisplayItem = p.getInventory().getItemInMainHand();
-          FileManager.addCategory(args[1].replaceAll("#", " "), DisplayItem);
+          final @NotNull ItemStack displayItem = p.getInventory().getItemInMainHand();
+          FileManager.addCategory(args[1].replaceAll("#", " "), displayItem);
           sender.sendMessage("§8[§a§l§oBannerABC§8] §7Folgende Kategorie wurde hinzugefügt: §a§l"
               + args[1].replaceAll("#", " "));
           return true;
@@ -64,7 +63,7 @@ public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter
                 "§8[§a§l§oBannerABC§8] §cFehler: Du hast nicht die erforderlichen Rechte!");
             return true;
           }
-          if (FileManager.CategoryExists(args[1].replaceAll("#", " "), true)) {
+          if (FileManager.categoryExists(args[1].replaceAll("#", " "), true)) {
             if (args[1].replaceAll("#", " ").equals("Unsortiert")) {
               sender.sendMessage(
                   "§8[§a§l§oBannerABC§8] §cFehler: Die Standart Kategorie kann nicht entfernt werden!");
@@ -86,11 +85,11 @@ public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter
                 "§8[§a§l§oBannerABC§8] §cFehler: Du hast nicht die erforderlichen Rechte!");
             return true;
           }
-          if (!FileManager.CategoryExists(args[1].replaceAll("#", " "), true)) {
+          if (!FileManager.categoryExists(args[1].replaceAll("#", " "), true)) {
             sender.sendMessage("§8[§a§l§oBannerABC§8] §cFehler: Kein gültige Kategorie!");
             return true;
           }
-          if (p.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
+          if (p.getInventory().getItemInMainHand().getType() == Material.AIR) {
             sender.sendMessage(
                 "§8[§a§l§oBannerABC§8] §cFehler: Du musst ein Item in der Hand halten!");
             return true;
@@ -112,11 +111,11 @@ public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter
                 "§8[§a§l§oBannerABC§8] §cFehler: Du hast nicht die erforderlichen Rechte!");
             return true;
           }
-          if (!FileManager.BannerNameExists(args[1].replaceAll("#", " "))) {
+          if (!FileManager.bannerNameExists(args[1].replaceAll("#", " "))) {
             sender.sendMessage("§8[§a§l§oBannerABC§8] §cFehler: Kein gültiges Banner!");
             return true;
           }
-          if (!FileManager.CategoryExists(args[2].replaceAll("#", " "), true)) {
+          if (!FileManager.categoryExists(args[2].replaceAll("#", " "), true)) {
             sender.sendMessage("§8[§a§l§oBannerABC§8] §cFehler: Kein gültige Kategorie!");
             return true;
           }
@@ -133,11 +132,11 @@ public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter
                 "§8[§a§l§oBannerABC§8] §cFehler: Du hast nicht die erforderlichen Rechte!");
             return true;
           }
-          if (!FileManager.CategoryExists(args[1].replaceAll("#", " "), true)) {
+          if (!FileManager.categoryExists(args[1].replaceAll("#", " "), true)) {
             sender.sendMessage("§8[§a§l§oBannerABC§8] §cFehler: Kein gültige Kategorie!");
             return true;
           }
-          if (FileManager.CategoryExists(args[2].replaceAll("#", " "), false)) {
+          if (FileManager.categoryExists(args[2].replaceAll("#", " "), false)) {
             sender.sendMessage(
                 "§8[§a§l§oBannerABC§8] §cFehler: Es existiert bereits eine Kategorie mit diesem Namen!");
             return true;
@@ -156,32 +155,32 @@ public class CMD_BANNERDATABASECATEGORY implements CommandExecutor, TabCompleter
       sender.sendMessage("§8[§a§l§oBannerABC§8] §cFalsche Argumente.");
       return true;
 
-    } catch (Exception e) {
+    } catch (final Exception e) {
       sender.sendMessage("§8[§a§l§oBannerABC§8] §cEin interner Fehler ist aufgetreten!");
       return true;
     }
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command cmd, String label,
-      String[] args) {
+  public List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String alias,
+      final String @NotNull [] args) {
     if (args.length == 1) {
       return Arrays.asList("add", "remove", "set", "setitem", "rename");
     } else if (args.length == 2) {
       if (args[0].equalsIgnoreCase("add")) {
         return Collections.singletonList("<BannerName>");
       } else if (args[0].equalsIgnoreCase("remove")) {
-        return new ArrayList<>(Utils.categories.keySet());
+        return new ArrayList<>(Utils.CATEGORIES.keySet());
       } else if (args[0].equalsIgnoreCase("set")) {
         return FileManager.getAllBannerNamesWithoutSpaces();
       } else if (args[0].equalsIgnoreCase("setitem")) {
-        return new ArrayList<>(Utils.categories.keySet());
+        return new ArrayList<>(Utils.CATEGORIES.keySet());
       } else if (args[0].equalsIgnoreCase("rename")) {
-        return new ArrayList<>(Utils.categories.keySet());
+        return new ArrayList<>(Utils.CATEGORIES.keySet());
       }
     } else if (args.length == 3) {
       if (args[0].equalsIgnoreCase("set")) {
-        return new ArrayList<>(Utils.categories.keySet());
+        return new ArrayList<>(Utils.CATEGORIES.keySet());
       } else if (args[0].equalsIgnoreCase("rename")) {
         return Collections.singletonList("<NewName>");
       }

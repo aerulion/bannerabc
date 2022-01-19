@@ -1,10 +1,10 @@
-package net.aerulion.bannerabc.CMDs;
+package net.aerulion.bannerabc.cmd;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import net.aerulion.bannerabc.Utils.FileManager;
-import net.aerulion.bannerabc.Utils.Utils;
+import net.aerulion.bannerabc.utils.FileManager;
+import net.aerulion.bannerabc.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,13 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.jetbrains.annotations.NotNull;
 
-public class CMD_BANNERDATABASE implements CommandExecutor, TabCompleter {
+public class DatabaseCommand implements CommandExecutor, TabCompleter {
 
   @Override
-  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+  public boolean onCommand(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String label, final String @NotNull [] args) {
 
-    if (!(sender instanceof Player)) {
+    if (!(sender instanceof final @NotNull Player p)) {
       sender.sendMessage(
           "§8[§a§l§oBannerABC§8] §cDieses Command kann nur von Spieler ausgeführt werden!");
       return true;
@@ -32,8 +33,6 @@ public class CMD_BANNERDATABASE implements CommandExecutor, TabCompleter {
 
     }
 
-    Player p = (Player) sender;
-
     try {
       if (args.length > 0) {
         if (args[0].equalsIgnoreCase("add")) {
@@ -43,19 +42,19 @@ public class CMD_BANNERDATABASE implements CommandExecutor, TabCompleter {
             return true;
           }
           if (args.length == 3) {
-            if (Utils.BannerItems.contains(p.getInventory().getItemInMainHand().getType())) {
-              String name = args[1].replaceAll("#", " ");
-              if (FileManager.BannerNameExists(name)) {
+            if (Utils.BANNER_ITEMS.contains(p.getInventory().getItemInMainHand().getType())) {
+              final @NotNull String name = args[1].replaceAll("#", " ");
+              if (FileManager.bannerNameExists(name)) {
                 p.sendMessage("§8[§a§l§oBannerABC§8] §cDieser Name wird bereits verwendet!");
                 return true;
               }
-              if (!FileManager.CategoryExists(args[2].replaceAll("#", " "), true)) {
+              if (!FileManager.categoryExists(args[2].replaceAll("#", " "), true)) {
                 p.sendMessage("§8[§a§l§oBannerABC§8] §cKeine gültige Kategorie!");
                 return true;
               }
-              ItemStack i = new ItemStack(p.getInventory().getItemInMainHand());
+              final @NotNull ItemStack i = new ItemStack(p.getInventory().getItemInMainHand());
               i.setAmount(1);
-              BannerMeta im = (BannerMeta) i.getItemMeta();
+              final @NotNull BannerMeta im = (BannerMeta) i.getItemMeta();
               im.setLore(Collections.singletonList(
                   "§7Dieses Banner aus der Datenbank entfernen: §aSTRG + Q"));
               im.setDisplayName("§a§l" + name);
@@ -71,15 +70,15 @@ public class CMD_BANNERDATABASE implements CommandExecutor, TabCompleter {
             return true;
           }
           if (args.length == 2) {
-            if (Utils.BannerItems.contains(p.getInventory().getItemInMainHand().getType())) {
-              String name = args[1].replaceAll("#", " ");
-              if (FileManager.BannerNameExists(name)) {
+            if (Utils.BANNER_ITEMS.contains(p.getInventory().getItemInMainHand().getType())) {
+              final @NotNull String name = args[1].replaceAll("#", " ");
+              if (FileManager.bannerNameExists(name)) {
                 p.sendMessage("§8[§a§l§oBannerABC§8] §cDieser Name wird bereits verwendet!");
                 return true;
               }
-              ItemStack i = new ItemStack(p.getInventory().getItemInMainHand());
+              final @NotNull ItemStack i = new ItemStack(p.getInventory().getItemInMainHand());
               i.setAmount(1);
-              BannerMeta im = (BannerMeta) i.getItemMeta();
+              final @NotNull BannerMeta im = (BannerMeta) i.getItemMeta();
               im.setLore(Collections.singletonList(
                   "§7Dieses Banner aus der Datenbank entfernen: §aSTRG + Q"));
               im.setDisplayName("§a§l" + name);
@@ -103,19 +102,19 @@ public class CMD_BANNERDATABASE implements CommandExecutor, TabCompleter {
         return true;
       }
 
-      if (Utils.banners.size() == 0) {
+      if (Utils.BANNERS.size() == 0) {
         p.sendMessage("§8[§a§l§oBannerABC§8] §7Bisher wurden keine Banner gespeichert!");
         return true;
       }
 
-      if (Utils.CurrentCat.get(p.getUniqueId()) == null) {
-        p.openInventory(Utils.CategoryMenu());
+      if (Utils.CURRENT_CAT.get(p.getUniqueId()) == null) {
+        p.openInventory(Utils.categoryMenu());
         return true;
       }
-      p.openInventory(Utils.CategoryBanner(Utils.CurrentCat.get(p.getUniqueId()),
-          Utils.page.get(p.getUniqueId())));
+      p.openInventory(Utils.categoryBanner(Utils.CURRENT_CAT.get(p.getUniqueId()),
+          Utils.PAGE.get(p.getUniqueId())));
       return true;
-    } catch (Exception e) {
+    } catch (final Exception e) {
       FileManager.setStandard();
       sender.sendMessage("§8[§a§l§oBannerABC§8] §cEin interner Fehler ist aufgetreten!");
       return true;
@@ -124,14 +123,14 @@ public class CMD_BANNERDATABASE implements CommandExecutor, TabCompleter {
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command cmd, String label,
-      String[] args) {
+  public List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String alias,
+      final String @NotNull [] args) {
     if (args.length == 1) {
       return Collections.singletonList("add");
     } else if (args.length == 2) {
       return Collections.singletonList("<BannerName>");
     } else if (args.length == 3) {
-      return new ArrayList<>(Utils.categories.keySet());
+      return new ArrayList<>(Utils.CATEGORIES.keySet());
     }
     return Collections.emptyList();
   }

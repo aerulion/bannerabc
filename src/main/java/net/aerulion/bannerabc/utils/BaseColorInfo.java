@@ -1,7 +1,8 @@
-package net.aerulion.bannerabc.Utils;
+package net.aerulion.bannerabc.utils;
 
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
 public enum BaseColorInfo {
 
@@ -24,29 +25,29 @@ public enum BaseColorInfo {
 
   DEFAULT(DyeColor.WHITE, Material.WHITE_BANNER);
 
-  private final DyeColor DyeCol;
-  private final Material mat;
+  private final DyeColor dyeColor;
+  private final Material material;
 
-  BaseColorInfo(DyeColor DyeCol, Material mat) {
-    this.DyeCol = DyeCol;
-    this.mat = mat;
+  BaseColorInfo(final DyeColor dyeColor, final Material material) {
+    this.dyeColor = dyeColor;
+    this.material = material;
   }
 
-  public static BaseColorInfo getBaseColorFromDyeColor(DyeColor dc) {
-    for (BaseColorInfo dFI : BaseColorInfo.values()) {
-        if (dFI.getDyeCol() == dc) {
-            return dFI;
-        }
+  public static @NotNull BaseColorInfo getBaseColorFromDyeColor(final DyeColor dyeColor) {
+    for (final @NotNull BaseColorInfo baseColorInfo : values()) {
+      if (baseColorInfo.getDyeColor() == dyeColor) {
+        return baseColorInfo;
+      }
     }
-    return BaseColorInfo.DEFAULT;
+    return DEFAULT;
   }
 
-  public DyeColor getDyeCol() {
-    return this.DyeCol;
+  public DyeColor getDyeColor() {
+    return this.dyeColor;
   }
 
   public Material getMaterial() {
-    return this.mat;
+    return this.material;
   }
 
 }
