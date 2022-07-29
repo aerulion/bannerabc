@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -34,14 +34,14 @@ tasks {
 }
 
 group = "net.aerulion"
-version = "1.5.0"
+version = "1.5.1"
 
 bukkit {
     name = "BannerABC"
     main = "net.aerulion.bannerabc.Main"
     version = getVersion().toString()
     author = "aerulion"
-    apiVersion = "1.18"
+    apiVersion = "1.19"
     commands {
         register("bannerabc") {
             description = "BannerABC öffnen."
